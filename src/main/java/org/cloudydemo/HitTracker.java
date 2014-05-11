@@ -40,14 +40,22 @@ public class HitTracker {
 	// The application name
 	private String appName;
 
-	private final String COLLECTION = "hitTracker";
+	//private final String COLLECTION = "hitTracker";
+	private final String COLLECTION = "hittracker";
 
 	@PostConstruct
 	void initialize() {
+		/*
 		String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
 		String user = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
 		String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
 		int port = Integer.decode(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
+		*/
+		String host = "ds033897.mongolab.com";
+		String user = "hello";
+		String password = "world";
+		int port = 33897;
+		
 		gearId = System.getenv("OPENSHIFT_GEAR_UUID");
 		appName = System.getenv("OPENSHIFT_APP_NAME");
 
@@ -58,7 +66,8 @@ public class HitTracker {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		mongoDB = mongo.getDB(System.getenv("OPENSHIFT_APP_NAME"));
+		//mongoDB = mongo.getDB(System.getenv("OPENSHIFT_APP_NAME"));
+		mongoDB = mongo.getDB("helloworld");
 		if (user != null && password != null) {
 			if (mongoDB.authenticate(user, password.toCharArray()) == false) {
 				throw new RuntimeException("Mongo authentication failed");
